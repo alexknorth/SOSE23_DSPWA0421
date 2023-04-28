@@ -1,11 +1,15 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <ul>
-      <li v-for="item in items" :key="item.id">
+    <!-- Inputelement Eingabe Suchbegriff, die Eingabe soll dazu führen,
+       dass nur die Items die diesen Begriff beinhalten 
+       (Suchbegriff: "katze", Anzeige: Katzen, Schleichkatzen ) angezeigt werden.
+      -->
+       <label for="freeTextSearch">Suchbegriff: </label>
+        <input v-model="searchText" name="freeTextSearch">       
+      <div v-for="item in filteredItems()" :key="item.id">
         <ItemComponent :item="item.message"/>
-      </li>
-    </ul>
+      </div>
   </div>
 </template>
 
@@ -22,11 +26,26 @@ export default {
   },
   data() {
     return {
-      parentMessage: 'Parent',
+      searchText: "",
       items: [
-        { id: 1, message: 'Foo' }, 
-        { id: 2, message: 'Bar' }
+        { id: 1, message: 'Katzen' }, 
+        { id: 2, message: 'Schleichkatzen' }, 
+        { id: 3, message: 'Mangusten' }, 
+        { id: 4, message: 'Hyänen' }, 
+        { id: 5, message: 'Hunde' }, 
+        { id: 6, message: 'Bären' }, 
+        { id: 7, message: 'Walrosse' },
+        { id: 8, message: 'Hundsrobben' },
+        { id: 9, message: 'Marder' }
       ]
+    }
+  },
+  methods: {
+    // Dies ist eine Funktion, die wir in der methods Option definieren
+    // Wir können sie in unserem Template oder in unserem Code aufrufen
+    // In diesem Beispiel rufen wir sie auf, wenn die Liste mit v-for durchlaufen wird
+    filteredItems() {
+      return this.items.filter(item => item.message.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1);
     }
   }
 }

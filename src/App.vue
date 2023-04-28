@@ -1,7 +1,6 @@
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Test2"/>
+    <HelloWorld msg="Listenfilter"/>
   </div>
 </template>
 
