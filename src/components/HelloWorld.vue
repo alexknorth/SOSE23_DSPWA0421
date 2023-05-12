@@ -8,12 +8,14 @@
        <label for="freeTextSearch">Suchbegriff: </label>
         <input v-model="searchText" name="freeTextSearch">       
       <div v-for="item in filteredItems()" :key="item.id">
-        <ItemComponent :item="item.message"/>
+        <ItemComponent :item="item.lastname"/>
       </div>
   </div>
 </template>
 
 <script>
+
+import axios from 'axios'
 
 import ItemComponent from './ItemComponent.vue'
 
@@ -27,17 +29,7 @@ export default {
   data() {
     return {
       searchText: "",
-      items: [
-        { id: 1, message: 'Katzen' }, 
-        { id: 2, message: 'Schleichkatzen' }, 
-        { id: 3, message: 'Mangusten' }, 
-        { id: 4, message: 'Hyänen' }, 
-        { id: 5, message: 'Hunde' }, 
-        { id: 6, message: 'Bären' }, 
-        { id: 7, message: 'Walrosse' },
-        { id: 8, message: 'Hundsrobben' },
-        { id: 9, message: 'Marder' }
-      ]
+      items: []
     }
   },
   methods: {
@@ -45,8 +37,13 @@ export default {
     // Wir können sie in unserem Template oder in unserem Code aufrufen
     // In diesem Beispiel rufen wir sie auf, wenn die Liste mit v-for durchlaufen wird
     filteredItems() {
-      return this.items.filter(item => item.message.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1);
+      return this.items.filter(item => item.lastname.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1);
     }
+  },
+  mounted () {
+    axios
+      .get('http://localhost:3000/users')
+      .then(response => (this.items = response.data))
   }
 }
 </script>

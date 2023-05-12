@@ -1,0 +1,46 @@
+{
+    "users": [
+        {
+        "id": 1,
+        "lastname": "Müller",
+        "firstname": "Hans"
+        },
+        {
+        "id": 2,
+        "lastname": "Schmidt",
+        "firstname": "Peter"
+        },
+        {
+        "id": 3,
+        "lastname": "Mustermann",
+        "firstname": "Peter"
+        },
+        {
+        "id": 4,
+        "lastname": "Bla",
+        "firstname": "Peter"
+        }
+    ],
+
+
+    "addresses": [
+        {
+            "id": 1,
+            "userId": 1,
+            "street": "Dorfstr.",
+            "number": 1
+        },
+        {
+            "id": 2,
+            "userId": 2,
+            "street": "Schmidtstr.",
+            "number": 1
+        },
+        {
+            "id": 3,
+            "userId": 1,
+            "street": "Parkstr.",
+            "number": 111
+        }
+    ],
+}
