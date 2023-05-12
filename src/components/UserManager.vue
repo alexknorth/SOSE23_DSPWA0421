@@ -7,8 +7,8 @@
       -->
        <label for="freeTextSearch">Suchbegriff: </label>
         <input v-model="searchText" name="freeTextSearch">       
-      <div v-for="item in filteredItems()" :key="item.id">
-        <ItemComponent :item="item.lastname"/>
+      <div v-for="user in filteredUsers()" :key="user">
+        <UserDetails :user="user"/>
       </div>
   </div>
 </template>
@@ -17,12 +17,12 @@
 
 import axios from 'axios'
 
-import ItemComponent from './ItemComponent.vue'
+import UserDetails from './UserDetails.vue'
 
 export default {
   components: {
-    ItemComponent
-  },
+    UserDetails
+},
   props: {
     msg: String
   },
@@ -36,8 +36,12 @@ export default {
     // Dies ist eine Funktion, die wir in der methods Option definieren
     // Wir können sie in unserem Template oder in unserem Code aufrufen
     // In diesem Beispiel rufen wir sie auf, wenn die Liste mit v-for durchlaufen wird
-    filteredItems() {
-      return this.items.filter(item => item.lastname.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1);
+    filteredUsers() {
+      return this.items.filter(
+        item => 
+          item.lastname.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1 ||
+          item.firstname.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1
+      );
     }
   },
   mounted () {
