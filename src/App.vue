@@ -1,17 +1,17 @@
 <template>
   <div>
-    <UserManager msg="Benutzerverwaltung"/>
+    <HelloWorld msg="Listenfilter"/>
   </div>
 </template>
 
 <script>
-import UserManager from './components/UserManager.vue';
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    UserManager
-}
+    HelloWorld
+  }
 }
 </script>
 
