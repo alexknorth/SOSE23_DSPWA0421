@@ -10,10 +10,10 @@
         <v-expansion-panels>
             <v-expansion-panel v-for="address in addresses" :key="address.id">
                 <v-expansion-panel-title>
-                    {{ address.userId}}
+                    {{ address.userId }}
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
-                    {{ address.street + " " + address.number }}
+                    <AddressDetails :address="address"></AddressDetails>
                 </v-expansion-panel-text>
             </v-expansion-panel>
         </v-expansion-panels>
