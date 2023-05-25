@@ -1,16 +1,16 @@
 <template>
   <div>
-    <HelloWorld msg="Listenfilter"/>
+    <UserManager msg="Benutzerverwaltung"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import UserManager from './components/UserManager.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    UserManager
   }
 }
 </script>
