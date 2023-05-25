@@ -3,26 +3,27 @@
         <p @click="loadAddress(user.id)">{{ user }}</p>
     </div>
     <div v-if="addresses.length > 0">
-        <!--<div v-for="address in addresses" :key="address.id">
+        <div v-for="address in addresses" :key="address.id">
            <AddressDetails :address="address"></AddressDetails>
-        </div>-->
+        </div>
 
-        <v-card class="mx-auto" max-width="300">
-            <v-list>
-                <v-list-item style="height: 60px;" prepend-avatar="https://cdn.vuetifyjs.com/images/john.png" :title="user.firstname + ' ' + user.lastname" :subtitle="user.email">
-                    <template v-slot:append>
-                        <v-btn color="primary" size="medium" variant="text" icon="mdi-menu-down" @click="menuDown = !menuDown"></v-btn>
-                    </template>
-                </v-list-item>
-            </v-list>
-        </v-card>
+        <v-expansion-panels>
+            <v-expansion-panel v-for="address in addresses" :key="address.id">
+                <v-expansion-panel-title>
+                    {{ address.userId}}
+                </v-expansion-panel-title>
+                <v-expansion-panel-text>
+                    {{ address.street + " " + address.number }}
+                </v-expansion-panel-text>
+            </v-expansion-panel>
+        </v-expansion-panels>
     </div>
 </template>
 
 <script>
 
 import axios from 'axios'
-//import AddressDetails from './AddressDetails.vue';
+import AddressDetails from './AddressDetails.vue';
 
 export default {
     props: {
@@ -40,7 +41,7 @@ export default {
             this.addresses = addresses.data;
         }
     },
-    //components: { AddressDetails }
+    components: { AddressDetails }
 }
 </script>
 
