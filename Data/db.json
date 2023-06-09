@@ -8,16 +8,16 @@
         {
         "id": 2,
         "lastname": "Schmidt",
-        "firstname": "Peter"
+        "firstname": "Paul"
         },
         {
         "id": 3,
-        "lastname": "Mustermann",
-        "firstname": "Peter"
+        "lastname": "Miller",
+        "firstname": "Klara"
         },
         {
         "id": 4,
-        "lastname": "Bla",
+        "lastname": "Eder",
         "firstname": "Peter"
         }
     ],
@@ -29,24 +29,24 @@
             "userId": 1,
             "street": "Dorfstr.",
             "number": 1,
-            "zip": 12345,
+            "zip": 10971,
             "city": "Berlin"
         },
         {
             "id": 2,
             "userId": 2,
             "street": "Schmidtstr.",
-            "number": 1,
-            "zip": 12345,
-            "city": "Berlin"
+            "number": 2,
+            "zip": 80333,
+            "city": "München"
         },
         {
             "id": 3,
-            "userId": 1,
+            "userId": 3,
             "street": "Parkstr.",
-            "number": 111,
-            "zip": 12345,
-            "city": "Berlin"
+            "number": 3,
+            "zip": 40321,
+            "city": "Hamburg"
         }
     ]
 }
