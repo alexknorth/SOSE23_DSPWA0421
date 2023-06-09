@@ -1,46 +1,573 @@
 {
-    "users": [
-        {
-        "id": 1,
-        "lastname": "Müller",
-        "firstname": "Hans"
-        },
-        {
-        "id": 2,
-        "lastname": "Schmidt",
-        "firstname": "Peter"
-        },
-        {
-        "id": 3,
-        "lastname": "Mustermann",
-        "firstname": "Peter"
-        },
-        {
-        "id": 4,
-        "lastname": "Bla",
-        "firstname": "Peter"
-        }
-    ],
-
-
-    "addresses": [
-        {
-            "id": 1,
-            "userId": 1,
-            "street": "Dorfstr.",
-            "number": 1
-        },
-        {
-            "id": 2,
-            "userId": 2,
-            "street": "Schmidtstr.",
-            "number": 1
-        },
-        {
-            "id": 3,
-            "userId": 1,
-            "street": "Parkstr.",
-            "number": 111
-        }
-    ],
+  "tenants": [
+    {
+      "id": 1,
+      "name": "MatchedXY GmbH"
+    },
+    {
+      "id": 2,
+      "name": "MarketingABC GmbH"
+    },
+    {
+      "id": 3,
+      "name": "DieBestenFachkräfte GmbH"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "lastname": "Müller",
+      "firstname": "Hans",
+      "tenantId": 1,
+      "email": "h.mueller@matchedxy.de",
+      "phone": "016298765432",
+      "subscribedToNewsletter": true,
+      "type": "SUPERUSER"
+    },
+    {
+      "id": 2,
+      "lastname": "Schmidt",
+      "firstname": "Peter",
+      "tenantId": 2,
+      "email": "peter.schmidt@recruitingxy.de",
+      "phone": "012345678",
+      "subscribedToNewsletter": false,
+      "type": "SUPERUSER"
+    },
+    {
+      "id": 3,
+      "lastname": "Mustermann",
+      "firstname": "Peter",
+      "tenantId": 3,
+      "email": "p.mustermann@diebestenfachkraefte.de",
+      "phone": "04076543",
+      "subscribedToNewsletter": true,
+      "type": "SUPERUSER"
+    },
+    {
+      "id": 4,
+      "lastname": "Sand",
+      "firstname": "Peter",
+      "tenantId": 3,
+      "email": "p.sand@diebestenfachkraefte.de",
+      "phone": "0307656454343",
+      "subscribedToNewsletter": true,
+      "type": "USER"
+    }
+  ],
+  "addresses": [
+    {
+      "id": 1,
+      "userId": 1,
+      "street": "Dorfstr.",
+      "number": 1,
+      "usedFor": [
+        "DELIVERY",
+        "INVOICE"
+      ]
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "street": "Schmidtstr.",
+      "number": 1,
+      "roles": [
+        "INVOICE"
+      ]
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "street": "Parkstr.",
+      "number": 111,
+      "roles": [
+        "DELIVER"
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "id": 1,
+      "name": "Potentielle Leads",
+      "description": "In diesem Stadium befinden sich potenitelle Firmen i.d.R. direkt nach der Firmenanlage.",
+      "image": "https://cdn.pixabay.com/photo/2016/09/21/04/46/barley-field-1684052_1280.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Qualifizierte Leads",
+      "description": "In diesem Stadium befinden sich Firmen i.d.R. wenn ein positives Erstgespräch stattfand",
+      "image": "https://cdn.pixabay.com/photo/2016/11/08/05/20/sunset-1807524_1280.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Erfolg",
+      "description": "Der Kontakt zur Firma führte zu einem Vertragsabschluss, keine weiteren Gespräche nötig.",
+      "image": "https://cdn.pixabay.com/photo/2017/08/22/00/33/woman-2667455_1280.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Absage",
+      "description": "Der Kontakt zur Firma führte zu keinem Vertragsabschluss, keine weiteren Gespräche nötig.",
+      "image": "https://cdn.pixabay.com/photo/2016/04/20/19/47/wolves-1341881_1280.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Warten",
+      "description": "Der Kontakt zur Firma ist gerade unterbrochen. I.dR. ist ein Wiedervorlagedatum hinterlegt.",
+      "image": "https://cdn.pixabay.com/photo/2018/01/15/19/45/sunset-3084651_1280.jpg"
+    }
+  ],
+  "companies": [
+    {
+      "id": 1,
+      "userId": 1,
+      "name": "Knorke XY GmbH",
+      "phone": "016298765432",
+      "stepId": 3,
+      "logoURL": "https://q8i4i8g7.rocketcdn.me/wp-content/uploads/2020/10/99gen_swooshyman.png"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "name": "SchnaffteXYZ GmbH",
+      "phone": "012345678",
+      "stepId": 4,
+      "logoURL": "https://q8i4i8g7.rocketcdn.me/wp-content/uploads/2020/10/99gen_arc.png"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "name": "Fünf Sterne GmbH",
+      "phone": "04076543",
+      "stepId": 1,
+      "logoURL": null
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "name": "DaumenHoch AG",
+      "phone": "0307656454343",
+      "stepId": 3,
+      "logoURL": null
+    }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "companyId": 1,
+      "salutation": "Herr",
+      "lastname": "Gause",
+      "firstname": "Gundula",
+      "phone": "016298765432",
+      "email": "kontakt.vermittler@knorke.de",
+      "types": [
+        "Vermittler"
+      ],
+      "roles": [
+        "Recruiter"
+      ]
+    },
+    {
+      "id": 2,
+      "companyId": 1,
+      "salutation": "Herr",
+      "lastname": "Puder",
+      "firstname": "Peter",
+      "phone": "016298765432",
+      "email": "kontakt.entscheider@knorke.de",
+      "types": [
+        "Entscheider"
+      ],
+      "roles": [
+        "Geschäftsführer"
+      ]
+    },
+    {
+      "id": 3,
+      "companyId": 2,
+      "salutation": "Herr",
+      "lastname": "Husten",
+      "firstname": "Hans",
+      "phone": "016298765432",
+      "email": "kontakt.entscheider@schnaffte.de",
+      "type": [
+        "Erstkontakt",
+        "Entscheider"
+      ],
+      "roles": [
+        "Recruiter",
+        "Geschäftsführer"
+      ]
+    }
+  ],
+  "activities": [
+    {
+      "id": 1,
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-20T10:30:00+01:00",
+      "note": "Sales kontaktiert, weiterleitung an Entscheider",
+      "tags": [
+        "kampagne123"
+      ],
+      "interpretation": "positive"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-22T10:30:00+01:00",
+      "note": "Anruf an Entscheider, zeigte großes Interesse, um Rückruf gebeten, auf Widervorlage für 2023-05-23",
+      "tags": [
+        "kampagne123"
+      ],
+      "interpretation": "positive"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-23T10:30:00+01:00",
+      "note": "Anruf an Entscheider, Kontingent auf Basis Tarif123 * 25",
+      "tags": [
+        "kampagne123",
+        "tarif123"
+      ],
+      "interpretation": "positive"
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-23T11:30:00+01:00",
+      "note": "Pipelineschritt von 'Potentielle Leads' zu 'Qualifizierte Leads' geändert.",
+      "tags": [
+        "kampagne123",
+        "tarif123"
+      ],
+      "interpretation": "positive"
+    },
+    {
+      "id": 5,
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-23T12:30:00+01:00",
+      "note": "Warte auf Bestätigung vom Entscheider.",
+      "tags": [
+        "Kampagne123",
+        "tarif123"
+      ],
+      "interpretation": "neutral"
+    },
+    {
+      "id": 6,
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-26T11:30:00+01:00",
+      "note": "Mail vom Entscheider erhalten, wartet auf interne Budgetfreigabe",
+      "tags": [
+        "kampagne123",
+        "tarif123"
+      ],
+      "interpretation": "positive"
+    },
+    {
+      "id": 7,
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-26T11:45:00+01:00",
+      "note": "Pipelineschritt von 'Qualifizierte Leads' zu 'Warten' geändert.",
+      "tags": [
+        "kampagne123",
+        "tarif123"
+      ],
+      "interpretation": "neutral"
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-30T15:08:54.020Z",
+      "note": "Status geändert von 'Erfolg' zu 'Qualifizierte Leads'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T03:10:06.803Z",
+      "note": "cxcxcxcxcxx",
+      "tags": [
+        "Kommentar"
+      ],
+      "interpretation": "neutral",
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T03:10:28.660Z",
+      "note": "vcvcvvcvcvcvc",
+      "tags": [
+        "Kommentar"
+      ],
+      "interpretation": "neutral",
+      "id": 10
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T03:18:06.329Z",
+      "note": "Status geändert von 'Qualifizierte Leads' zu 'Erfolg'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 11
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T07:13:16.612Z",
+      "note": "Status geändert von 'Erfolg' zu 'Qualifizierte Leads'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "companyId": 2,
+      "timestamp": "2023-05-31T07:31:06.605Z",
+      "note": "Status geändert von 'Qualifizierte Leads' zu 'Erfolg'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 13
+    },
+    {
+      "userId": 1,
+      "companyId": 3,
+      "timestamp": "2023-05-31T07:31:09.542Z",
+      "note": "Status geändert von 'Qualifizierte Leads' zu 'Potentielle Leads'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 14
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T12:55:24.061Z",
+      "note": "Kontakt 'Herr Kontakt Muster' wurde angerufen.",
+      "tags": [
+        "Anrufstart "
+      ],
+      "interpretation": "neutral",
+      "id": 15
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T12:55:28.837Z",
+      "note": "Anruf zu Kontakt 'Herr Kontakt Muster' wurde beendet.",
+      "tags": [
+        "Anrufende"
+      ],
+      "interpretation": "neutral",
+      "id": 16
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T13:23:32.383Z",
+      "note": "dsdssdssds",
+      "tags": [
+        "Kommentar"
+      ],
+      "interpretation": "neutral",
+      "id": 17
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T13:48:59.627Z",
+      "note": "Kontakt 'Herr Kontakt Muster' wurde angerufen.",
+      "tags": [
+        "Anrufstart"
+      ],
+      "interpretation": "neutral",
+      "id": 18
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T13:49:00.492Z",
+      "note": "Anruf zu Kontakt 'Herr Kontakt Muster' wurde beendet.",
+      "tags": [
+        "Anrufende"
+      ],
+      "interpretation": "neutral",
+      "id": 19
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T14:04:04.141Z",
+      "note": "Kontakt 'Herr Gundula Gause' wurde angerufen.",
+      "tags": [
+        "Anrufstart"
+      ],
+      "interpretation": "neutral",
+      "id": 20
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-05-31T14:04:04.861Z",
+      "note": "Anruf zu Kontakt 'Herr Gundula Gause' wurde beendet.",
+      "tags": [
+        "Anrufende"
+      ],
+      "interpretation": "neutral",
+      "id": 21
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-06-02T09:21:09.476Z",
+      "note": "Status geändert von 'Qualifizierte Leads' zu 'Erfolg'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 22
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-06-02T09:21:16.705Z",
+      "note": "Status geändert von 'Erfolg' zu 'Qualifizierte Leads'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 23
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-06-02T09:22:08.333Z",
+      "note": "Kontakt 'Herr Gundula Gause' wurde angerufen.",
+      "tags": [
+        "Anrufstart"
+      ],
+      "interpretation": "neutral",
+      "id": 24
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-06-02T09:22:11.278Z",
+      "note": "Anruf zu Kontakt 'Herr Gundula Gause' wurde beendet.",
+      "tags": [
+        "Anrufende"
+      ],
+      "interpretation": "neutral",
+      "id": 25
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-06-02T09:27:16.989Z",
+      "note": "Status geändert von 'Qualifizierte Leads' zu 'Erfolg'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 26
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-06-02T09:52:23.429Z",
+      "note": "Kontakt 'Herr Peter Puder' wurde angerufen.",
+      "tags": [
+        "Anrufstart"
+      ],
+      "interpretation": "neutral",
+      "id": 27
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-06-02T09:52:23.852Z",
+      "note": "Anruf zu Kontakt 'Herr Peter Puder' wurde beendet.",
+      "tags": [
+        "Anrufende"
+      ],
+      "interpretation": "neutral",
+      "id": 28
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-06-02T09:52:27.803Z",
+      "note": "fdgfdgfdggfdgfd",
+      "tags": [
+        "Kommentar"
+      ],
+      "interpretation": "neutral",
+      "id": 29
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-06-08T14:19:55.545Z",
+      "note": "Status geändert von 'Erfolg' zu 'Absage'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 30
+    },
+    {
+      "userId": 1,
+      "companyId": 2,
+      "timestamp": "2023-06-08T14:19:57.009Z",
+      "note": "Status geändert von 'Erfolg' zu 'Absage'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 31
+    },
+    {
+      "userId": 1,
+      "companyId": 1,
+      "timestamp": "2023-06-08T14:19:58.472Z",
+      "note": "Status geändert von 'Absage' zu 'Erfolg'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 32
+    },
+    {
+      "userId": 1,
+      "companyId": 4,
+      "timestamp": "2023-06-08T14:19:59.673Z",
+      "note": "Status geändert von 'Qualifizierte Leads' zu 'Erfolg'.",
+      "tags": [
+        "Statusänderung"
+      ],
+      "interpretation": "neutral",
+      "id": 33
+    }
+  ]
 }

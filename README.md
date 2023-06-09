@@ -1,4 +1,4 @@
-# hello-world
+# LeadMachine
 
 ## Project setup
 ```
