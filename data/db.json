@@ -28,19 +28,25 @@
             "id": 1,
             "userId": 1,
             "street": "Dorfstr.",
-            "number": 1
+            "number": 1,
+            "zip": 12345,
+            "city": "Berlin"
         },
         {
             "id": 2,
             "userId": 2,
             "street": "Schmidtstr.",
-            "number": 1
+            "number": 1,
+            "zip": 12345,
+            "city": "Berlin"
         },
         {
             "id": 3,
             "userId": 1,
             "street": "Parkstr.",
-            "number": 111
+            "number": 111,
+            "zip": 12345,
+            "city": "Berlin"
         }
     ]
 }
