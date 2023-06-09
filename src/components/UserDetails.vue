@@ -1,30 +1,16 @@
 <template>
-  <div>
-    <p @click="loadAddress(user.id)">{{ user }}</p>
-  </div>
-  <div v-if="addresses.length > 0">
-    <div v-for="address in addresses" :key="address.id">
+  <v-expansion-panels>
+    <v-expansion-panel>
+    <v-expansion-panel-title>
+      {{ user.firstname + ' ' + user.lastname }}
+    </v-expansion-panel-title>
+    <v-expansion-panel-text>
+      <div v-for="address in addresses" :key="address.id">
         <AddressDetail :address="address"></AddressDetail> 
-    </div> 
-
-    
-    <v-expansion-panels>
-      <v-expansion-panel>
-      <v-expansion-panel-title>
-        {{ user.firstname +user.lastname }}
-      </v-expansion-panel-title>
-        <v-expansion-panels>
-          <v-expansion-panel
-            v-for="address in addresses" :key="address.id"
-            :title="address.street" 
-            :text="address.number"
-          ></v-expansion-panel>
-        </v-expansion-panels>
-      </v-expansion-panel>
-    </v-expansion-panels>
-    
-  
-  </div>
+      </div> 
+    </v-expansion-panel-text>
+    </v-expansion-panel>
+  </v-expansion-panels>
 </template>
 
 <script>
@@ -53,6 +39,11 @@ export default {
       this.addresses = addresses.data;
     },
   },
+  mounted: function () {
+  this.$nextTick(function () {
+    this.loadAddress(this.user.id);
+  })
+}
 };
 </script>
 

@@ -1,7 +1,15 @@
 <template>
-    <div class="address-item"> 
-        {{ address.street + " " +address.number }}
-    </div>
+    <v-card> 
+      <v-card-title>
+        {{ address.zip  + ' '  + address.city }}
+      </v-card-title>
+      <v-card-subtitle>
+        {{ address.street + " " + address.number }}
+      </v-card-subtitle>
+      <v-card-text>
+
+      </v-card-text>
+    </v-card>
 </template>
 
 <script>
@@ -13,13 +21,4 @@ export default {
 </script>
 
 <style scoped>
-.address-item {
-    color:green;
-    text-align: left;
-   
-
-
-}
-
-
 </style>
