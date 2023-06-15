@@ -3,9 +3,9 @@ import axios from "axios";
 class WeatherData{
 
     async getGeoData(city){
+        var location;
         await axios.get("https://geocoding-api.open-meteo.com/v1/search?count=1&name=" + city)
-        .then(response => {var location= JSON.parse(JSON.stringify(response.data.results))})
-
+        .then(response => {location= JSON.parse(JSON.stringify(response.data.results))})
         //var location= location.results
         console.log(location[0].longitude)
         console.log(location[0].latitude)
@@ -60,4 +60,4 @@ class WeatherData{
     }
 }
 
-export default WeatherData
+export default WeatherData;
