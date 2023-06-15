@@ -58,7 +58,7 @@
 
         <v-list class="bg-transparent">
             <v-list-item
-            v-for="i in 5"
+            v-for="i in 6"
             :key="i"
             :title="weather.daily.time[i]"
             :append-icon="mdi-cloud"
