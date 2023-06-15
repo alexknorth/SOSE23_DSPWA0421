@@ -39,7 +39,6 @@
         <v-list-item-subtitle>{{ weather.current_weather.weathercode + weather.daily_units.precipitation_probability_mean }}</v-list-item-subtitle>
         </v-list-item>
     </div>
-<!--
     <v-expand-transition>
         <div v-if="expand">
         <div class="py-2">
@@ -59,11 +58,11 @@
 
         <v-list class="bg-transparent">
             <v-list-item
-            v-for="item in forecast"
-            :key="item.day"
-            :title="item.day"
-            :append-icon="item.icon"
-            :subtitle="item.temp"
+            v-for="i in 5"
+            :key="i"
+            :title="weather.daily.time[i]"
+            :append-icon="mdi-cloud"
+            :subtitle="weather.daily.temperature_2m_max[i] + weather.daily_units.temperature_2m_min"
             >
             </v-list-item>
         </v-list>
@@ -76,7 +75,7 @@
         <v-btn @click="expand = !expand">
         {{ !expand ? 'Full Report' : 'Hide Report' }}
         </v-btn>
-    </v-card-actions>-->
+    </v-card-actions>
   
     </v-card>
   </div>
