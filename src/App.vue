@@ -1,19 +1,16 @@
 <template>
   <div>
-    <UserManager msg="Benutzerverwaltung"/>
-    <WeatherDetails/>
+    <UserManager/>
   </div>
 </template>
 
 <script>
 import UserManager from './components/UserManager.vue';
-import WeatherDetails from './components/WeatherDetails.vue';
 
 export default {
   name: 'App',
   components: {
-    UserManager,
-    WeatherDetails
+    UserManager
 }
 }
 </script>
