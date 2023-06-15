@@ -6,14 +6,12 @@
       <v-card-subtitle>
         {{ address.street + " " + address.number }}
       </v-card-subtitle>
-      <v-card-text>
-        <WeatherDetails :city=address.city></WeatherDetails>
-      </v-card-text>
+        <WeatherDetails></WeatherDetails>
     </v-card>
 </template>
 
 <script>
-import WeatherDetails from './weatherDetails.vue';
+import WeatherDetails from './WeatherDetails.vue';
 
 export default {
     props: {

@@ -1,33 +1,23 @@
 <template>
-    <v-card
-    class="mx-auto"
-    max-width="368"
-    >
-    <v-card-item title={{ weather.city }}>
+  <div v-if="weather!==null">
+    <v-card class="mx-auto" max-width="368">
+    <v-card-item title=Berlin>
         <template v-slot:subtitle>
-        <v-icon
-            icon={{ weather.notice-icon }}
-            size="18"
-            color="error"
-            class="me-1 pb-1"
-        ></v-icon>
-        {{ weather.notice }}
+        <v-icon icon="mdi-alert" size="18" color="error" class="me-1 pb-1"></v-icon>
+        <!-- Add weather notice -->
         </template>
     </v-card-item>
 
     <v-card-text class="py-0">
         <v-row align="center" no-gutters>
-        <v-col
-            class="text-h2"
-            cols="6"
-        >
-        {{ weather.temp }}
+        <v-col class="text-h2" cols="6" >
+        {{ weather.current_weather.temperature + weather.daily_units.temperature_2m_min}}
         </v-col>
 
         <v-col cols="6" class="text-right">
             <v-icon
             color="error"
-            icon={{ weather.weather-icon }}
+            icon="mdi-weather-hurricane"
             size="88"
             ></v-icon>
         </v-col>
@@ -39,14 +29,14 @@
         density="compact"
         prepend-icon="mdi-weather-windy"
         >
-        <v-list-item-subtitle>{{ weather.wind }}</v-list-item-subtitle>
+        <v-list-item-subtitle>{{ weather.current_weather.windspeed + weather.daily_units.windspeed_10m_max }}</v-list-item-subtitle>
         </v-list-item>
 
-        <v-list-item>
+        <v-list-item
         density="compact"
         prepend-icon="mdi-weather-pouring"
         >
-        <v-list-item-subtitle>{{ weather.rain }}</v-list-item-subtitle>
+        <v-list-item-subtitle>{{ weather.current_weather.weathercode + weather.daily_units.precipitation_probability_mean }}</v-list-item-subtitle>
         </v-list-item>
     </div>
 <!--
@@ -87,10 +77,14 @@
         {{ !expand ? 'Full Report' : 'Hide Report' }}
         </v-btn>
     </v-card-actions>-->
+  
     </v-card>
+  </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props: {
     city: {}
@@ -105,23 +99,19 @@ export default {
             { day: 'Wednesday', icon: 'mdi-white-balance-sunny', temp: '22\xB0/14\xB0' },
             { day: 'Thursday', icon: 'mdi-cloud', temp: '25\xB0/15\xB0' },
         ],
-        weather: [],
+        weather: null,
     };
   },
   methods: {
-    async loadWeather(cityId) {
-      var weather = await axios.get(
-        "http://localhost:3000/weather?cityId=" + cityId
-      );
-      weather.data.forEach((address) =>
-        console.log(weather.cityId + " " + address.number)
-      );
-      this.weather = weather.data;
+    async loadWeather() {
+      await axios.get(
+        "https://api.open-meteo.com/v1/forecast?latitude=54.18&longitude=12.43&current_weather=true&forecast_days=7&timezone=CET&daily=temperature_2m_min,temperature_2m_max,windspeed_10m_max,precipitation_probability_mean,winddirection_10m_dominant"
+      ).then(response=>this.weather=response.data);
     },
   },
-  mounted: function () {
-  this.$nextTick(function () {
-    this.loadAddress(this.city.id);
+  mounted() {
+  this.$nextTick(async function () {
+    await this.loadWeather();
   })
 }
 }
