@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <ChatElement></ChatElement>
     <!-- Inputelement Eingabe Suchbegriff, die Eingabe soll dazu führen,
        dass nur die Items die diesen Begriff beinhalten 
        (Suchbegriff: "katze", Anzeige: Katzen, Schleichkatzen ) angezeigt werden.
@@ -18,10 +19,12 @@
 import axios from 'axios'
 
 import UserDetails from './UserDetails.vue'
+import ChatElement from './ChatElement.vue'
 
 export default {
   components: {
-    UserDetails
+    UserDetails,
+    ChatElement
 },
   props: {
     msg: String

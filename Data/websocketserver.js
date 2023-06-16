@@ -14,7 +14,7 @@ wsServer.on('connection', (socket) => {
 
    // Broadcast the message to all connected clients
    wsServer.clients.forEach(function each(client) {
-      if (client !== socket && client.readyState === WebSocket.OPEN) {
+      if (client !== socket && client.readyState === 1/*WebSocket.OPEN*/) {
         client.send(data.toString());
         // console.log("message",data.toString())
       }
