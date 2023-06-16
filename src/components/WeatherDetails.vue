@@ -46,7 +46,7 @@
           <div class="py-2">
             <v-slider
               v-model="time"
-              :max="6"
+              :max="7"
               :step="1"
               :ticks="labels"
               class="mx-4"
@@ -94,7 +94,7 @@ export default {
         return {
             labels: { 0: 'SU', 1: 'MO', 2: 'TU', 3: 'WED', 4: 'TH', 5: 'FR', 6: 'SA' },
             expand: false,
-            time: 0,
+            time: 4, //new Date().getDay(),
             name: "WeatherDetails",
             weather: {
                 current: null,
