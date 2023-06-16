@@ -11,8 +11,11 @@
     "@mdi/font": "^7.2.96",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
+    "express": "^4.18.2",
+    "http": "^0.0.1-security",
     "vue": "^3.2.13",
-    "vuetify": "^3.2.4"
+    "vuetify": "^3.2.4",
+    "ws": "^8.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -21,7 +24,8 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.0.3",
+    "json-server": "^0.17.3"
   },
   "eslintConfig": {
     "root": true,
