@@ -83,61 +83,88 @@
 </template>
 
 <script>
-import WeatherData from "../dataProvider.js";
+import axios from "axios";
+import WeatherData from "dataProvider.js"
 
 const weatherData = new WeatherData();
 export default {
-    props: {
-        city: null
-    },
-    data() {
-        return {
-            labels: { 0: 'SU', 1: 'MO', 2: 'TU', 3: 'WED', 4: 'TH', 5: 'FR', 6: 'SA' },
-            expand: false,
-            time: 0,
-            name: "WeatherDetails",
-            weather: {
-                current: null,
-                prediction: null,
+data() {
+    
+    return {
+        name: "WeatherDetails",
+        location: null,
+        longitude: null,
+        lati: null,
+        city:"Hamburg",
+        day: null
+       
+        
+        
+       }
+},
+
+methods:{
+    
+
+    async getGeoData(){
+        await axios.get("https://geocoding-api.open-meteo.com/v1/search?count=1&name=" + this.city)
+        .then(response => {this.location= response.data})
+
+        var location= JSON.parse(JSON.stringify(this.location.results))
+        console.log(location[0].longitude)
+        console.log(location[0].latitude)
+
+        var geoData= {
+            longitude: location[0].longitude,
+            latitude:location[0].latitude
+
+        }
+        return geoData;
+
+        },
+
+
+        async getPredictions(day){
+            //var location= await this.getGeoData()
+            var location = await WeatherData.getGeoData("Hamburg")
+            await axios.get("https://api.open-meteo.com/v1/forecast?latitude="+ location.latitude + "&longitude=" 
+            +location.longitude +"&current_weather=true&forecast_days=7&timezone=CET&daily=temperature_2m_min,"+
+            "temperature_2m_max,windspeed_10m_max,precipitation_probability_mean,winddirection_10m_dominant")
+            .then(response => {this.prediction= response.data})
+
+            var weatherDaily= {
+                date: JSON.parse(JSON.stringify(this.prediction.daily.time[day])),
+                lowestTemp: JSON.parse(JSON.stringify(this.prediction.daily.temperature_2m_min[day])),
+                highestTemp: JSON.parse(JSON.stringify(this.prediction.daily.temperature_2m_max[day])),
+                windSpeed: JSON.parse(JSON.stringify(this.prediction.daily.windspeed_10m_max[day]))
             }
-        };
-    },
+
+            console.log(weatherDaily)
+            return weatherDaily;
+
+        },
+
+        async getCurrentWeather(){
+            //var location= await this.getGeoData()
+            var location = await WeatherData.getGeoData("Hamburg")
+            await axios.get("https://api.open-meteo.com/v1/forecast?latitude="+ location.latitude + "&longitude=" 
+            +location.longitude +"&current_weather=true&forecast_days=7&timezone=CET&daily=temperature_2m_min,"+
+            "temperature_2m_max,windspeed_10m_max,precipitation_probability_mean,winddirection_10m_dominant")
+            .then(response => {this.today=response.data})
+            var weatherToday={
+                lowestTemp: JSON.parse(JSON.stringify(this.today.daily.temperature_2m_min[0])),
+                highestTemp: JSON.parse(JSON.stringify(this.today.daily.temperature_2m_max[0])),
+                windSpeed: JSON.parse(JSON.stringify(this.today.daily.windspeed_10m_max[0])),
+
+                currentTemp: JSON.parse(JSON.stringify(this.today.current_weather.temperature))
+            
+            }
+            console.log(weatherToday)
+            return weatherToday;
 
 
-/*
-
-forecast: [
-            { day: 'Tuesday', icon: 'mdi-white-balance-sunny', temp: '24\xB0/12\xB0' },
-            { day: 'Wednesday', icon: 'mdi-white-balance-sunny', temp: '22\xB0/14\xB0' },
-            { day: 'Thursday', icon: 'mdi-cloud', temp: '25\xB0/15\xB0' },
-        ],
-*/
-
-  methods: {
-    async getPredictions() {
-      var labelsFull = { 0: 'Sunday', 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday' };
-      this.weather.prediction = [];
-      var rawData = await weatherData.getPredictions(this.city, 7);
-        for (let i = 1; i < 7; i++){
-            this.weather.prediction.push({ day: labelsFull[new Date(rawData.daily.time[i]).getDay()], icon: 'mdi-white-balance-sunny', temp:  rawData.daily.temperature_2m_min[i] + '\xB0/' + rawData.daily.temperature_2m_max[i] + '\xB0' });
         }
-    },
-    async getCurrentWeather() {
-      this.weather.current = await weatherData.getCurrentWeather(this.city);
-    },
-    getIconByWeatherCode(weatherCode) {
-        if (weatherCode < 5) {
-            return "mdi-abjad-arabic";
-        } else {
-            return "mdi-access-point-plus";
-        }
-    }
-  },
-  mounted() {
-    this.$nextTick(async function () {
-        await this.getCurrentWeather();
-        await this.getPredictions();
-    })
-  }
-};
+}
+
+}
 </script>
