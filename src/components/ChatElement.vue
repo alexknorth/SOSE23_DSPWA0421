@@ -12,12 +12,14 @@
       <div
         v-for="(message, index) in messages"
         :key="index"
-        :class="[
-          message.username === username ? 'left-bubble' : 'right-bubble',
-        ]"
+        style="padding: 50px;"
       >
-        <b>{{ message.username }}</b
-        >: <em>{{ message.text }}</em>
+        <div :class="[
+          message.username === username ? 'left-bubble' : 'right-bubble',
+        ]">
+            <b>{{ message.username }}</b
+            >: <em>{{ message.text }}</em>
+        </div>
       </div>
       <div>
         <form @submit.prevent="handleMessageSubmit(username, text)">
@@ -70,44 +72,51 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+
 .left-bubble {
-    position: relative;
-  display: inline-block;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #f0f0f0;
-  color: #333;
+position: relative;
+margin:0 auto;
+padding: 1rem;
+-webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+background: #3babe2;
+text-align: left;
 }
 
 .left-bubble::before {
-    content: '';
-  top: 50%;
-  left: -20px;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  background-color: #f0f0f0;
-  border-top-right-radius: 50%;
+content: ' ';
+position: absolute;
+width: 0;
+height: 0;
+left: 28px;
+top: -17px;
+border-left: 14px solid transparent;
+border-right: 14px solid transparent;
+border-bottom: 17px solid #3babe2;
 }
 
 .right-bubble {
-  position: relative;
-  display: inline-block;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #f0f0f0;
-  color: #333;
-  text-align: right;
+position: relative;
+margin:0 auto;
+padding: 1rem;
+-webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+background: #e23b8c;
+text-align: right;
 }
 
 .right-bubble::before {
-  content: '';
-  top: 50%;
-  right: -20px;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  background-color: #f0f0f0;
-  border-top-left-radius: 50%;
+content: ' ';
+position: absolute;
+width: 0;
+height: 0;
+left: 28px;
+top: -17px;
+border-left: 14px solid transparent;
+border-right: 14px solid transparent;
+border-bottom: 17px solid #e23b8c;
 }
 </style>
