@@ -1,11 +1,18 @@
-<template>
-  <v-card variant="outlined">
-    <div v-if="!connected">
+<template >
+  <v-list>
+  <v-list-item v-for="(item, index) in connectionsList" :key = "index">
+   {{ item }}
+  </v-list-item>  
+  </v-list>
+
+  <div style="padding: 30px; background-image: linear-gradient(to right, rgb(203, 203, 211), rgb(156, 190, 156));">
+  <v-card variant="outlined" >
+    <div v-if="!connected" >
       <form @submit.prevent="connectWebSocket">
-        <v-label>Enter your name to start chatting</v-label>
-        <input type="text" v-model="username" placeholder="Name" />
-        <v-divider></v-divider>
-        <button type="submit">Connect</button>
+        <v-label style="color:#000; font-weight: bold; padding: 20px;">Enter your name and connect</v-label>
+        <input type="text" style="padding-left: 30px; border: 2px solid;" v-model="username" placeholder="Name" />
+                <!--<v-divider></v-divider> -->
+        <v-btn type="submit" style="background-color:orange; margin-left: 20px; ">Connect</v-btn>
       </form>
     </div>
     <div v-else>
@@ -18,9 +25,11 @@
           message.username === username ? 'left-bubble' : 'right-bubble',
         ]">
             <b>{{ message.username }}</b
+              
             >: <em>{{ message.text }}</em>
         </div>
       </div>
+
       <div>
         <form @submit.prevent="handleMessageSubmit(username, text)">
           <input type="text" v-model="text" placeholder="Write message..." />
@@ -29,6 +38,7 @@
       </div>
     </div>
   </v-card>
+</div>
 </template>
   
 <script>
@@ -43,6 +53,7 @@ export default {
       socket: null,
       connected: false,
       connection: null,
+      connectionsList: [],
     };
   },
   methods: {
@@ -51,20 +62,35 @@ export default {
       this.connection = new WebSocket("ws://localhost:3001");
 
       this.connection.onmessage = (event) => {
-        this.messages.push(JSON.parse(event.data));
+        const parseData= JSON.parse(event.data);
+        this.messages.push(parseData);
+
+        const isKnownUser=this.connectionsList.filter(user => user===parseData.username).length
+        if (!isKnownUser){
+          this.connectionsList.push(parseData.username)
+      console.log("User " + this.connectionsList)
+              } 
       };
 
       this.connection.onopen = () => {
         this.connected = true;
         console.log("Successfully connected to the echo websocket server...");
+        this.text= "hello";
+        this.handleMessageSubmit(this.username);
       };
-    },
+
+      },     
+
+
+
     handleMessageSubmit(username) {
       const newMessage = { username: username, text: this.text };
       this.connection.send(JSON.stringify(newMessage));
       this.messages.push(newMessage);
       this.text = '';
+      
     },
+
   },
   mounted: function () {},
 };

@@ -9,6 +9,7 @@ const wsServer = new ws.Server({ noServer: true });
 wsServer.on('connection', (socket) => {
   // Log a message when a new client connects
   console.log('client connected.');
+  
   // Listen for incoming WebSocket messages
   socket.on('message', (data) => {
 
